@@ -99,7 +99,6 @@ class HealthyShipUser(Resource):
         requestValue = request.get_json()
         h = hashlib.md5(requestValue['password'].encode())
         requestValue['password'] = h.hexdigest()
-       
         db.db.users.insert_one(requestValue)
 
         return jsonify("Register sucessfully")
@@ -107,16 +106,28 @@ class HealthyShipUser(Resource):
 @name_space.route('/user/<string:email>/<string:password>')
 class HealthyShipUser(Resource):
     @name_space.response(404, 'Resource not found.')
-    @name_space.response(200, 'Vehicle found successfully.')
+    @name_space.response(200, 'User exist.')
     @name_space.response(500, 'Resource incorrect')
     def get(self, email, password):
         response = db.db.users.find_one({"email": email})
         h = hashlib.md5(password.encode())
         password = h.hexdigest()
-        if(response['password'] != password):
+        if(response == None or (response['password'] != password)):
             abort(404, description="Resource not found")
-        print((response['password'] + " "+ password))
         return jsonify(str(response))
+
+@name_space.route('/user/<string:email>/vehicles')
+class HealthyShipUserVehicle(Resource):
+    @name_space.response(404, 'Resource not found.')
+    @name_space.response(200, 'User exist.')
+    @name_space.response(500, 'Resource incorrect')
+    def get(self, email):
+        response = db.db.users.find_one({"email": email})
+        list_vehicles = []
+        for v in response['vehicles']:
+            v = db.db.vehicles.find_one({"_id": v})
+            list_vehicles.append(v)
+        return jsonify(str(list_vehicles))
 
 
 @name_space.route('/bahia')

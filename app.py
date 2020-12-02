@@ -39,6 +39,8 @@ class LicenseReader(Resource):
     def post(self):
         requestValue = request.get_json()
         text = requestValue['code_img']
+        #ADD CONNECTION TO LICENSE-PLATE READER
+        # Source code ....
 
         # Returns text of the license plate code reader
         return jsonify({"code": text})

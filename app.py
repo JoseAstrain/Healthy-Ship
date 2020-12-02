@@ -104,7 +104,7 @@ class HealthyShipUser(Resource):
 
         return jsonify("Register sucessfully")
 
-@name_space.route('/user/<string:email>/<string:password>')
+@name_space.route('/login/<string:email>/<string:password>')
 class HealthyShipUser(Resource):
     @name_space.response(404, 'Resource not found.')
     @name_space.response(200, 'Vehicle found successfully.')
@@ -113,9 +113,8 @@ class HealthyShipUser(Resource):
         response = db.db.users.find_one({"email": email})
         h = hashlib.md5(password.encode())
         password = h.hexdigest()
-        if(response['password'] != password):
+        if(response==None or (response['password'] != password)):
             abort(404, description="Resource not found")
-        print((response['password'] + " "+ password))
         return jsonify(str(response))
 
 

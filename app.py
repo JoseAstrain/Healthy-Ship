@@ -104,7 +104,7 @@ class HealthyShipUser(Resource):
 
         return jsonify("Register sucessfully")
 
-@name_space.route('/user/<string:email>/<string:password>')
+@name_space.route('/login/<string:email>/<string:password>')
 class HealthyShipUser(Resource):
     @name_space.response(404, 'Resource not found.')
     @name_space.response(200, 'Vehicle found successfully.')

@@ -113,9 +113,8 @@ class HealthyShipUser(Resource):
         response = db.db.users.find_one({"email": email})
         h = hashlib.md5(password.encode())
         password = h.hexdigest()
-        if(response['password'] != password):
+        if(response==None or (response['password'] != password)):
             abort(404, description="Resource not found")
-        print((response['password'] + " "+ password))
         return jsonify(str(response))
 
 

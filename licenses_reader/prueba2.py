@@ -12,8 +12,7 @@ def adjust_gamma(image, gamma=1.0):
 	return cv2.LUT(image, table)
 
 def recognize_text(imag):
-	pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
-
+	
 	img=cv2.imread(imag)
 	kernel = (np.ones((3,3),np.uint8))
 	imagen = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)

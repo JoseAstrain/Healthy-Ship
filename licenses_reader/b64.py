@@ -11,7 +11,7 @@ import uuid
 
 
 
-OUTPUT_FOLDER = "D:\\Hackaton 2020\\Healthy-Ship\\licenses_reader\\licenses"
+OUTPUT_FOLDER = os.path.join("~/licenses_reader/licenses","")
 
 class Converter:
 

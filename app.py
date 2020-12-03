@@ -41,9 +41,9 @@ class LicenseReader(Resource):
         requestValue = request.get_json()
         text = requestValue['code_img']
 
-        x=Converter.getPNGFromBase64(text)
+        code_text = Converter.getPNGFromBase64(text)
         # Returns text of the license plate code reader
-        return jsonify({"code": x})
+        return jsonify({"code": code_text})
 
 
 

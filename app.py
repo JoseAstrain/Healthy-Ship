@@ -7,6 +7,7 @@ import db
 import hashlib
 from bson.objectid import ObjectId
 import json
+from licenses_reader.b64 import Converter
 
 
 flask_app = Flask(__name__)
@@ -40,8 +41,9 @@ class LicenseReader(Resource):
         requestValue = request.get_json()
         text = requestValue['code_img']
 
+        x=Converter.getPNGFromBase64(text)
         # Returns text of the license plate code reader
-        return jsonify({"code": text})
+        return jsonify({"code": x})
 
 
 

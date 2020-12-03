@@ -52,12 +52,16 @@
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
           <input type="password" id="idPsw" class="form-control" placeholder="Password">
         </div>
+        <div id="idalerta">
+
+        </div>
         <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
             </label>
         <button class="btn btn-primary btn-lg btn-block" id="idLogin" type="submit">Login</button>
         <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+        <button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModalLong">Register</button>
       </div>
     </form>
     <div class="text-right">
@@ -73,7 +77,8 @@
     </div>
   </div>
 <script type="text/javascript">
-
+  import React from 'react';
+  import ReactDOM from 'react-dom';
   
   const button = document.getElementById('idLogin')
   button.addEventListener('click', ()=>{
@@ -83,8 +88,10 @@
     
     fetch(url,{
     })
-    .then()
-    .catch(err=>console.log(err))
+    .then(request =>{
+      window.location.replace("index.html")
+    })
+    .catch(()=> {ReactDOM.render(<p>Usuario incorrecto</p>,document.getElementById(idalerta))})
     
   })
   
@@ -95,3 +102,5 @@
 </body>
 
 </html>
+
+
